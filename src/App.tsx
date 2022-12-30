@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+} from 'react';
+import { Title } from './components/Title';
+import { Content } from './components/Content/Content';
+import { UserInfo } from './components/UserInfo';
+import { ErrorNotification } from './components/ErrorNotification';
+import { Error } from './types/Error';
 
-function App() {
+export const App: React.FC = () => {
+  const [error, setError] = useState<Error | null>(null);
+
+  const handleError = useCallback((errorType: Error | null) => {
+    setError(errorType);
+  }, []);
+
+  useEffect(() => {
+    const onScreenTimer = setTimeout(() => setError(null), 3000);
+
+    return () => clearTimeout(onScreenTimer);
+  }, [error]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="todoapp">
+      <Title />
+
+      <Content
+        onError={handleError}
+      />
+
+      {!error && (
+        <UserInfo />
+      )}
+
+      {error && (
+        <ErrorNotification
+          error={error}
+          onError={handleError}
+        />
+      )}
     </div>
   );
-}
-
-export default App;
+};

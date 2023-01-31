@@ -14,4 +14,4 @@ Implement the Todo App according to the markup and implement the functionality s
 
 3. <b>Tech stack:</b> ReactJS, React Router, JavaScript, TypeScript, HTML, CSS/SCSS, Bulma.
 
-4. [PREVIEW LINK](https://dmytro-lebedchenko.github.io/react_todo_app/)
+4. [PREVIEW LINK](https://dmytro-lebedchenko.github.io/react_todo_app/#/)
